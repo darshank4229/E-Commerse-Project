@@ -34,16 +34,11 @@ public class AdminAccountCreater implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		log.info("Admin Account Creation Started");
 		if(Ur.existsByEmail(adminEmail)) {
-			log.info("Admin Account is alredy present");
+			log.info("Admin Account is alredy Exist");
 		}
 		else {
-			User u1= new User();
-			u1.setActive(true);
-			u1.setEmail(adminEmail);
-			u1.setPassword(Pe.encode(adminPassword));
-			u1.setMobile(0L);
-			u1.setUsername(adminUserName);
-			u1.setRole(UserRole.ADMIN);
+			User u1 = new User(null, adminUserName, adminEmail, adminMobile, Pe.encode(adminPassword),
+					UserRole.ADMIN, true);
 			Ur.save(u1);
 			log.info("Admin Account is created Succesfully");
 		}
